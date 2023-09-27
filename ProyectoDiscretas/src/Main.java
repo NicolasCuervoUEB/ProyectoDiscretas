@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 
 public class Main extends JDialog {
-    public Main() {
+	static final long serialVersionUID = 1L;
+
+	public Main() {
         setTitle("Welcome to MathCode");
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -52,13 +54,13 @@ public class Main extends JDialog {
                     if (isPrime) {
                         JOptionPane.showMessageDialog(null, number1 + " is a prime number.");
                     } else {
-                        String divisors = "Divisors of " + number1 + ": ";
+                        StringBuilder divisors = new StringBuilder("Divisors of " + number1 + ": ");
                         for (int i = 1; i <= number1; i++) {
                             if (number1 % i == 0) {
-                                divisors += i + " ";
+                                divisors.append(i).append(" ");
                             }
                         }
-                        JOptionPane.showMessageDialog(null, divisors);
+                        JOptionPane.showMessageDialog(null, divisors.toString());
                     }
 
                 } catch (NumberFormatException event) {
@@ -136,16 +138,16 @@ public class Main extends JDialog {
                     int targetBase = Integer.parseInt(inputTargetBase.getText());
 
                     try {
-                        String result = "";
+                        String resultString = "";
 
                         if (sourceBase <= 36 && targetBase <= 36) {
-                            result = convertBase(number, sourceBase, targetBase);
+                            resultString = convertBase(number, sourceBase, targetBase);
                         } else {
                             JOptionPane.showMessageDialog(null, "Bases greater than 36 are not supported.");
                             return;
                         }
 
-                        JOptionPane.showMessageDialog(null, "The number " + number + " in base " + sourceBase + " is " + result + " in base " + targetBase);
+                        JOptionPane.showMessageDialog(null, "The number " + number + " in base " + sourceBase + " is " + resultString + " in base " + targetBase);
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Please enter valid values.");
                     }
